@@ -11,78 +11,31 @@
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script src="javascripts/base64.js"></script>
+    <script src="javascripts/marked.js"></script>
+    <script type="text/javascript">
+      var githubApiUrl = 'https://api.github.com/repos/jeffkeeling/tabrestorer/readme';
+      var contentContainerId = "readmeContent";
+      var callbackFunctionName = "handleApiResponse";
+
+      function handleApiResponse(response)
+      {
+        var encodedContent = response.data.content;
+        var markdownText = Base64.decode(encodedContent);
+        var renderedHtml = marked(markdownText);
+
+        document.getElementById(contentContainerId).innerHTML = renderedHtml;
+      }
+
+      var newScript = document.createElement('script');
+      newScript.src = githubApiUrl + "?callback=" + callbackFunctionName;
+      document.getElementsByTagName('head')[0].appendChild(newScript);
+</script>
   </head>
   <body>
     <div class="wrapper">
       <header>
-        <h1>Tabrestorer</h1>
-        <p>The Tab Restorer Safari Extension creates a button with dropdown menu to restore the last 5 closed tabs.</p>
-
-        <p class="view"><a href="https://github.com/jeffkeeling/tabrestorer">View the Project on GitHub <small>jeffkeeling/tabrestorer</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/jeffkeeling/tabrestorer/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/jeffkeeling/tabrestorer/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/jeffkeeling/tabrestorer">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h1>
-<a id="tab-restorer" class="anchor" href="#tab-restorer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tab Restorer</h1>
-
-<p>Tab Restorer is a Safari extension that provides a button in the Safari toolbar with the 5 most recently closed tabs allowing you to quickly restore them upon clicking each one.</p>
-
-<p><img src="https://raw.githubusercontent.com/jeffkeeling/tabrestorer/master/screenshot.jpg" alt="Screenshot of Tab Restorer"></p>
-
-<h2>
-<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
-
-<ol>
-<li>Download the extension <a href="https://github.com/jeffkeeling/tabrestorer/releases/download/v1.5.1/tabrestorer.safariextz">here</a>
-</li>
-<li>Double-click the downloaded tabrestorer.safariextz file</li>
-</ol>
-
-<h2>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
-
-<p>When you click the Tab Restorer button, you will see the 5 most recently closed tabs with the last closed tab at the top. Upon clicking one these links, it will open to the right of your currently open tabs.</p>
-
-<h3>
-<a id="optional-usage" class="anchor" href="#optional-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Optional Usage</h3>
-
-<p>If you open so many tabs that they overflow, it can be difficult to know if you really opened another new tab. In the settings for this extension, you can turn on a badge alert to flash when you open a new overflowed tab.
-<img src="https://raw.githubusercontent.com/jeffkeeling/tabrestorer/master/screenshot2.jpg" alt="Screenshot of new tab overflow alert"></p>
-
-<h2>
-<a id="version-history" class="anchor" href="#version-history" aria-hidden="true"><span class="octicon octicon-link"></span></a>Version History</h2>
-
-<h3>
-<a id="15" class="anchor" href="#15" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.5</h3>
-
-<ul>
-<li>Created settings menu for new tab notification</li>
-</ul>
-
-<h3>
-<a id="14" class="anchor" href="#14" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.4</h3>
-
-<ul>
-<li>Added open tab notification to toolbar button</li>
-</ul>
-
-<h2>
-<a id="author" class="anchor" href="#author" aria-hidden="true"><span class="octicon octicon-link"></span></a>Author</h2>
-
-<p>Jeff Keeling</p>
-
-<p><a href="http://jeffkeeling.me">http://jeffkeeling.me</a></p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/jeffkeeling">jeffkeeling</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+        <div id="readmeContent"></div>
     </div>
     <script src="javascripts/scale.fix.js"></script>
     
